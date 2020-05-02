@@ -37,22 +37,15 @@ if len(args) == 6:
     seed = int(args[5])
     reset_random_seeds(seed)
 
-map_file = '././data/maps/nameToId.json'
-folder = "././data/cube/"
-
 print('Loading Cube Data . . .\n')
 
-num_cards, name_lookup, card_to_int, int_to_card = \
-    utils.get_card_maps(map_file)
+cubes = np.load('././output/cubes.npy')
 
-num_cubes = utils.get_num_cubes(folder)
-
-cubes = utils.build_cubes(folder, num_cubes, num_cards, name_lookup,
-                          card_to_int)
+num_cards = cubes.shape[1]
 
 print('Loading Adjacency Matrix . . .\n')
 
-adj_mtx = np.load('././output/full_adj_mtx.npy')
+adj_mtx = np.load('././output/deck_adj_mtx.npy')
 
 # print('Converting Graph Weights to Probabilities . . . \n')
 print('Creating Graph for Regularization . . . \n')
